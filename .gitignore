@@ -2,3 +2,4 @@
 dist
 *.lock
 *-lock.json
+*.log
