@@ -57,7 +57,7 @@ ReactDOM.render(
 | toggleScheme | Устанавливает альтернативную тему. |
 
 
-Пример использования:
+### Пример
 ```jsx
 // settings.js
 import { useScheme } from "@_themis/usescheme";
