@@ -12,5 +12,15 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/profilemyprofile/useScheme.git"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.1"
   }
 }
