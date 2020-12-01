@@ -56,7 +56,8 @@ ReactDOM.render(
 | setScheme | Устанавливает текущую тему приложения (``space_gray`` или ``bright_light``) |
 | toggleScheme | Устанавливает альтернативную тему. |
 
-Пример:
+
+Пример использования:
 ```jsx
 // settings.js
 import { useScheme } from "@_themis/usescheme";
