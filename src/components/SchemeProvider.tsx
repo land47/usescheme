@@ -5,16 +5,12 @@ import { appearanceByScheme, stringToScheme } from "../utils";
 import bridge, { VKBridgeSubscribeHandler } from "@vkontakte/vk-bridge";
 import { ConfigProvider } from "@vkontakte/vkui";
 
-export type SchemeProviderProps = {
-  initial?: Scheme;
-};
+const SchemeProvider: FC = ({ children }) => {
+  const [scheme, setScheme] = useState<Scheme | null>(null);
 
-const SchemeProvider: FC<SchemeProviderProps> = ({
-  initial = Scheme.LIGHT,
-  children,
-}) => {
-  const [scheme, setScheme] = useState<Scheme>(initial);
-
+  /**
+   * Ловим тему в событии `VKWebAppUpdateConfig`
+   * */
   useEffect(() => {
     const themeCatcher: VKBridgeSubscribeHandler = ({ detail }) => {
       if (detail.type !== "VKWebAppUpdateConfig") {
@@ -27,6 +23,10 @@ const SchemeProvider: FC<SchemeProviderProps> = ({
     bridge.subscribe(themeCatcher);
     return () => bridge.unsubscribe(themeCatcher);
   }, []);
+
+  if (scheme === null) {
+    return null;
+  }
 
   return (
     <SchemeContext.Provider value={{ scheme, setScheme }}>
