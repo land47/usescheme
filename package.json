@@ -1,5 +1,5 @@
 {
-  "name": "usescheme",
+  "name": "@_themis/usescheme",
   "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
