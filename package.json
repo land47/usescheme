@@ -1,6 +1,6 @@
 {
   "name": "usescheme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,10 +21,10 @@
   "peerDependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "^4.0.1",
-    "@vkontakte/vkui": "^3.13.2"
+    "react-scripts": "^4.0.1"
   },
   "dependencies": {
-    "@vkontakte/vk-bridge": "^2.3.0"
+    "@vkontakte/vk-bridge": "^2.3.0",
+    "@vkontakte/vkui": "^3.13.2"
   }
 }
