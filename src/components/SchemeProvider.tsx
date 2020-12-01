@@ -1,11 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import { SchemeContext } from "../contexts";
-import { Scheme } from "../types";
+import { ConfigProviderProps, Scheme } from "../types";
 import { appearanceByScheme, stringToScheme } from "../utils";
 import bridge, { VKBridgeSubscribeHandler } from "@vkontakte/vk-bridge";
 import { ConfigProvider } from "@vkontakte/vkui";
 
-const SchemeProvider: FC = ({ children }) => {
+const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
+  children,
+  ...props
+}) => {
   const [scheme, setScheme] = useState<Scheme | null>(null);
 
   /**
@@ -30,7 +33,11 @@ const SchemeProvider: FC = ({ children }) => {
 
   return (
     <SchemeContext.Provider value={{ scheme, setScheme }}>
-      <ConfigProvider scheme={scheme} appearance={appearanceByScheme(scheme)}>
+      <ConfigProvider
+        scheme={scheme}
+        appearance={appearanceByScheme(scheme)}
+        {...props}
+      >
         {children}
       </ConfigProvider>
     </SchemeContext.Provider>
