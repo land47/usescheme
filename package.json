@@ -1,6 +1,6 @@
 {
   "name": "@_themis/usescheme",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,5 +26,8 @@
   "dependencies": {
     "@vkontakte/vk-bridge": "^2.3.0",
     "@vkontakte/vkui": "^3.13.2"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
