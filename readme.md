@@ -30,22 +30,33 @@ ReactDOM.render(
 );
 ```
 
-Для установки начального значения темы можно передать проп ``initial``:
+### Важно
+``SchemeProvider`` инкапсулирует внутри себя логику получения и установки темы от ``bridge``. Он так же внутри себя работает с компонентом ``VKUI`` ``ConfigProvider``, и принимает в себя все валидные для него свойства. Если ваше приложение уже обёрнуто в ``ConfigProvider``, повторите эти шаги:
+- Замените ``ConfigProvider`` на ``SchemeProvider``
+- Передайте ему пропсы, которые были до этого, исключая ``scheme`` и ``appearance``
+
+Было:
+```jsx
+// index.js
+ReactDOM.render(
+  <ConfigProvider isWebView={true} scheme={...}>
+    <App />
+  </ConfigProvider>,
+  document.getElementById("root")
+);
+```
+Стало:
 ```jsx
 // index.js
 import { SchemeProvider } from "@_themis/usescheme";
 
 ReactDOM.render(
-  <SchemeProvider initial="space_gray">
+  <SchemeProvider isWebView={true}>
     <App />
   </SchemeProvider>,
   document.getElementById("root")
 );
 ```
-Он принимает два значения: ``space_gray`` или ``bright_light``. По-умолчанию используется ``bright_light``.
-
-### Важно
-``SchemeProvider``  инкапсулирует внутри себя логику получения и установки темы от ``bridge``.
 
 ## useScheme
 Хук ``useScheme`` возвращает объект. Описание его свойств: 
