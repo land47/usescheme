@@ -24,6 +24,7 @@
     "react-scripts": "^4.0.1"
   },
   "dependencies": {
+    "@_themis/vkstorage": "^1.0.9",
     "@vkontakte/vk-bridge": "^2.3.0",
     "@vkontakte/vkui": "^3.13.2"
   },
