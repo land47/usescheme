@@ -1,9 +1,11 @@
-import { FC, useEffect, useState } from "react";
-import { SchemeContext } from "../contexts";
-import { ConfigProviderProps, Scheme } from "../types";
-import { appearanceByScheme, stringToScheme } from "../utils";
 import bridge, { VKBridgeSubscribeHandler } from "@vkontakte/vk-bridge";
 import { ConfigProvider } from "@vkontakte/vkui";
+import { storage } from "@_themis/vkstorage";
+import { FC, useEffect, useState } from "react";
+
+import { SchemeContext } from "../contexts";
+import { ConfigProviderProps, Scheme } from "../types";
+import { appearanceByScheme, schemeFromStorage, stringToScheme } from "../utils";
 
 const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
   children,
@@ -15,16 +17,30 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
    * Ловим тему в событии `VKWebAppUpdateConfig`
    * */
   useEffect(() => {
-    const themeCatcher: VKBridgeSubscribeHandler = ({ detail }) => {
+    if (!bridge.isIframe()) {
+      return void schemeFromStorage().then(scheme =>
+        setScheme(stringToScheme(scheme))
+      );
+    }
+
+    const schemeCatcher: VKBridgeSubscribeHandler = ({ detail }) => {
       if (detail.type !== "VKWebAppUpdateConfig") {
         return;
       }
 
-      setScheme(stringToScheme(detail.data.scheme));
+      schemeFromStorage().then((scheme) => {
+        console.log(scheme);
+
+        if (scheme) {
+          return setScheme(stringToScheme(scheme));
+        }
+
+        setScheme(stringToScheme(detail.data.scheme));
+      });
     };
 
-    bridge.subscribe(themeCatcher);
-    return () => bridge.unsubscribe(themeCatcher);
+    bridge.subscribe(schemeCatcher);
+    return () => bridge.unsubscribe(schemeCatcher);
   }, []);
 
   if (scheme === null) {
@@ -32,7 +48,15 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
   }
 
   return (
-    <SchemeContext.Provider value={{ scheme, setScheme }}>
+    <SchemeContext.Provider
+      value={{
+        scheme,
+        setScheme(scheme: Scheme) {
+          storage.set("scheme", scheme);
+          setScheme(scheme)
+        }
+      }}
+    >
       <ConfigProvider
         scheme={scheme}
         appearance={appearanceByScheme(scheme)}
