@@ -1,11 +1,12 @@
+import { FC, useEffect, useState } from "react";
 import bridge, { VKBridgeSubscribeHandler } from "@vkontakte/vk-bridge";
 import { ConfigProvider } from "@vkontakte/vkui";
 import { storage } from "@_themis/vkstorage";
-import { FC, useEffect, useState } from "react";
 
 import { SchemeContext } from "../contexts";
 import { ConfigProviderProps, Scheme } from "../types";
 import { appearanceByScheme, schemeFromStorage, stringToScheme } from "../utils";
+import { IS_IFRAME } from "../shared/constants"
 
 const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
   children,
@@ -17,7 +18,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
    * Ловим тему в событии `VKWebAppUpdateConfig`
    * */
   useEffect(() => {
-    if (!bridge.isIframe()) {
+    if (!IS_IFRAME) {
       return void schemeFromStorage().then(scheme =>
         setScheme(stringToScheme(scheme))
       );
@@ -29,8 +30,6 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
       }
 
       schemeFromStorage().then((scheme) => {
-        console.log(scheme);
-
         if (scheme) {
           return setScheme(stringToScheme(scheme));
         }
