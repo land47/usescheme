@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import bridge, { VKBridgeSubscribeHandler } from "@vkontakte/vk-bridge";
 import { ConfigProvider } from "@vkontakte/vkui";
-import { storage } from "@_themis/vkstorage";
 
 import { SchemeContext } from "../contexts";
 import { ConfigProviderProps, Scheme } from "../types";
-import { appearanceByScheme, schemeFromStorage, stringToScheme } from "../utils";
+import { appearanceByScheme, schemeFromStorage, stringToScheme, withStorage } from "../utils";
 import { IS_IFRAME } from "../shared/constants"
 
 const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
@@ -50,10 +49,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
     <SchemeContext.Provider
       value={{
         scheme,
-        setScheme(scheme: Scheme) {
-          storage.set("scheme", scheme);
-          setScheme(scheme)
-        }
+        setScheme: withStorage(setScheme)
       }}
     >
       <ConfigProvider
