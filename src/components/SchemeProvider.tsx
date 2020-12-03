@@ -24,18 +24,18 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
       );
     }
 
-    const schemeCatcher: VKBridgeSubscribeHandler = ({ detail }) => {
+    const schemeCatcher: VKBridgeSubscribeHandler = async ({ detail }) => {
       if (detail.type !== "VKWebAppUpdateConfig") {
         return;
       }
 
-      schemeFromStorage().then((scheme) => {
-        if (scheme) {
-          return setScheme(stringToScheme(scheme));
-        }
+      const storageScheme = await schemeFromStorage()
 
-        setScheme(stringToScheme(detail.data.scheme));
-      });
+      if (storageScheme) {
+        return setScheme(stringToScheme(storageScheme));
+      }
+
+      setScheme(stringToScheme(detail.data.scheme));
     };
 
     bridge.subscribe(schemeCatcher);
