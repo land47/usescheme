@@ -8,16 +8,18 @@ export default function withScheme<P>(Child: ComponentType<P>) {
     static contextType = SchemeContext;
     static displayName = `withScheme(${Child.displayName || Child.name})`;
 
-    controls: SchemeControls = {
-      scheme: this.context.scheme,
-      setScheme: this.context.setScheme,
-      toggleScheme: () => {
-        this.context.setScheme(alternativeScheme(this.context.scheme))
-      }
-    }
-
     render = () => {
-      return <Child {...this.props} {...this.controls} />;
+      const { scheme, setScheme } = this.context;
+
+      const controls: SchemeControls = {
+        scheme,
+        setScheme,
+        toggleScheme: () => {
+          setScheme(alternativeScheme(scheme))
+        }
+      }
+
+      return <Child {...this.props} {...controls} />;
     }
   };
 
