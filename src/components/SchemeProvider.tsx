@@ -64,7 +64,9 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
    * Подстраиваем статус-бар, экшен-бар и бар с навигацией под тему.
    * */
   useEffect(() => {
-    if (scheme === null) return;
+    if (scheme === null) {
+      return;
+    }
 
     const color = colorByScheme(scheme);
 
