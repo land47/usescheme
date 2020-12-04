@@ -1,6 +1,6 @@
 {
   "name": "@_themis/usescheme",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,9 +24,8 @@
     "react-scripts": "^3.4.4"
   },
   "dependencies": {
-    "@_themis/vkstorage": "^1.1.2",
+    "@_themis/vkstorage": "1.1.4",
     "@vkontakte/icons": "^1.61.1",
-    "@vkontakte/vk-bridge": "^2.3.0",
     "@vkontakte/vkui": "^3.13.2"
   },
   "files": [
