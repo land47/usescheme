@@ -29,7 +29,7 @@
     "react-scripts": "^3.4.4"
   },
   "dependencies": {
-    "@_themis/vkstorage": "1.1.4"
+    "@_themis/vkstorage": "1.1.5"
   },
   "files": [
     "./dist"
