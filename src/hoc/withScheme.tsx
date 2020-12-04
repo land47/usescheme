@@ -1,3 +1,4 @@
+import React from "react";
 import { Component, ComponentType, } from "react";
 import { SchemeContext } from "../contexts";
 import { SchemeControls } from "../types";
