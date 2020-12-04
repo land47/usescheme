@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import bridge, { VKBridgeSubscribeHandler } from "@vkontakte/vk-bridge";
 import { ConfigProvider } from "@vkontakte/vkui";
 
@@ -28,7 +28,11 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
         return;
       }
 
+      console.log(detail);
+
       const storageScheme = await schemeFromStorage()
+
+      console.log({ storageScheme });
 
       if (storageScheme) {
         return setScheme(stringToScheme(storageScheme));
