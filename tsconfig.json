@@ -10,7 +10,7 @@
     "declaration": true,
     "rootDir": "./src",
     "outDir": "./dist",
-    "jsx": "react-jsx",
+    "jsx": "react",
     "moduleResolution": "node"
   }
 }
