@@ -28,11 +28,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
         return;
       }
 
-      console.log(detail);
-
       const storageScheme = await schemeFromStorage()
-
-      console.log({ storageScheme });
 
       if (storageScheme) {
         return setScheme(stringToScheme(storageScheme));
@@ -42,6 +38,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
     };
 
     bridge.subscribe(schemeCatcher);
+    bridge.send("VKWebAppInit");
     return () => bridge.unsubscribe(schemeCatcher);
   }, []);
 
