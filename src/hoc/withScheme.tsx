@@ -1,5 +1,4 @@
-import React from "react";
-import { Component, ComponentType, } from "react";
+import React, { Component, ComponentType, } from "react";
 import { SchemeContext } from "../contexts";
 import { SchemeControls } from "../types";
 import { alternativeScheme } from "../utils";
