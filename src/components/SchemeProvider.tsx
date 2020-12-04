@@ -38,7 +38,17 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
     };
 
     bridge.subscribe(schemeCatcher);
+
+    /**
+     * После вызова `VKWebAppInit` будут повторно вызваны подписанные `bridge.subscribe()`
+     * обработчики. Нужно для того, чтобы если это событие уже было вызвано, но `SchemeProvider`
+     * не успел подписать `schemeCatcher`, не происходило бесконечной загрузки приложения
+     * (потому что scheme равно null из-за того, что не была "поймана" тема). 
+     * 
+     * Повторного рендера при этом происходить не будет.
+     */
     bridge.send("VKWebAppInit");
+
     return () => bridge.unsubscribe(schemeCatcher);
   }, []);
 
