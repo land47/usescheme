@@ -1,5 +1,5 @@
-export default function backgroundColor() {
-  return getComputedStyle(document.body).getPropertyValue(
-    "--background_content"
-  );
+import { Scheme } from "../types";
+
+export default function colorByScheme(scheme: Scheme) {
+  return scheme === Scheme.DARK ? "#19191a" : "#fff";
 }
