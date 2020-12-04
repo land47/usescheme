@@ -6,6 +6,7 @@ import { SchemeContext } from "../contexts";
 import { ConfigProviderProps, Scheme } from "../types";
 import {
   appearanceByScheme,
+  backgroundColor,
   schemeFromStorage,
   stringToScheme,
   withStorage,
@@ -22,7 +23,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
    * Ловим тему в событии `VKWebAppUpdateConfig`
    * */
   useEffect(() => {
-    if (!IS_IFRAME || !IS_WEBVIEW) {
+    if (!IS_IFRAME && !IS_WEBVIEW) {
       return void schemeFromStorage().then((scheme) =>
         setScheme(stringToScheme(scheme))
       );
@@ -58,6 +59,17 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
 
     return () => bridge.unsubscribe(schemeCatcher);
   }, []);
+
+  /**
+   * Подстраиваем статус-бар, экшен-бар и бар с навигацией под тему.
+   * */
+  useEffect(() => {
+    bridge.send("VKWebAppSetViewSettings", {
+      status_bar_style: scheme === Scheme.LIGHT ? "dark" : "light",
+      action_bar_color: backgroundColor(),
+      navigation_bar_color: backgroundColor(),
+    });
+  }, [scheme]);
 
   if (scheme === null) {
     return null;
