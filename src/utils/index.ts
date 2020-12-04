@@ -4,3 +4,4 @@ export { default as appearanceByScheme } from "./appearanceByScheme";
 export { default as schemeFromStorage } from "./schemeFromStorage";
 export { default as delay } from "./delay";
 export { default as withStorage } from "./withStorage";
+export { default as backgroundColor } from "./backgroundColor";
