@@ -6,7 +6,7 @@ import { SchemeContext } from "../contexts";
 import { ConfigProviderProps, Scheme } from "../types";
 import {
   appearanceByScheme,
-  backgroundColor,
+  colorByScheme,
   schemeFromStorage,
   stringToScheme,
   withStorage,
@@ -64,10 +64,14 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
    * Подстраиваем статус-бар, экшен-бар и бар с навигацией под тему.
    * */
   useEffect(() => {
+    if (scheme === null) return;
+
+    const color = colorByScheme(scheme);
+
     bridge.send("VKWebAppSetViewSettings", {
       status_bar_style: scheme === Scheme.LIGHT ? "dark" : "light",
-      action_bar_color: backgroundColor(),
-      navigation_bar_color: backgroundColor(),
+      action_bar_color: color,
+      navigation_bar_color: color,
     });
   }, [scheme]);
 
