@@ -2,6 +2,9 @@ import { stringToScheme, throttle } from "../utils";
 import { Scheme } from "../types";
 import { storage } from "@_themis/vkstorage";
 
+/**
+ * Используется для вызова `setScheme` с записыванием темы в стор.
+ * */
 const withStorage = <T, A extends [T], R>(func: (...args: A) => R) => {
   function setSchemeToStorage(scheme: Scheme) {
     storage.set("scheme", scheme);
@@ -13,8 +16,11 @@ const withStorage = <T, A extends [T], R>(func: (...args: A) => R) => {
     const [scheme] = args;
 
     if (typeof scheme === "string") {
-      throttled(stringToScheme(scheme));
       func(...args);
+
+      requestAnimationFrame(() => {
+        throttled(stringToScheme(scheme));
+      });
     }
   };
 };
