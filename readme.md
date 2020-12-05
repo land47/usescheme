@@ -6,11 +6,11 @@
 
 Используя npm: 
 ```sh
-$ npm i @_themis/usescheme
+$ npm i @unexp/usescheme
 ```
 Используя yarn: 
 ```sh
-$ yarn add @_themis/usescheme
+$ yarn add @unexp/usescheme
 ```
 
 # Использование
@@ -20,7 +20,7 @@ $ yarn add @_themis/usescheme
 
 ```jsx
 // index.js
-import { SchemeProvider } from "@_themis/usescheme";
+import { SchemeProvider } from "@unexp/usescheme";
 
 ReactDOM.render(
   <SchemeProvider>
@@ -48,7 +48,7 @@ ReactDOM.render(
 Стало:
 ```jsx
 // index.js
-import { SchemeProvider } from "@_themis/usescheme";
+import { SchemeProvider } from "@unexp/usescheme";
 
 ReactDOM.render(
   <SchemeProvider isWebView={true}>
@@ -71,7 +71,7 @@ ReactDOM.render(
 ### Пример
 ```jsx
 // settings.js
-import { useScheme } from "@_themis/usescheme";
+import { useScheme } from "@unexp/usescheme";
 
 export default function Settings() {
   const { scheme, toggleScheme } = useScheme();
