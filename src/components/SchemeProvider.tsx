@@ -1,5 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
-import bridge, { VKBridgeSubscribeHandler } from "@vkontakte/vk-bridge";
+import bridge, {
+  UpdateConfigData,
+  VKBridgeSubscribeHandler,
+} from "@vkontakte/vk-bridge";
 import { ConfigProvider } from "@vkontakte/vkui";
 
 import { SchemeContext } from "../contexts";
@@ -30,7 +33,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
     }
 
     const schemeCatcher: VKBridgeSubscribeHandler = async ({
-      detail: { type, data },
+      detail: { data, type },
     }) => {
       if (type !== "VKWebAppUpdateConfig") {
         return;
@@ -42,7 +45,8 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
         return setScheme(stringToScheme(storageScheme));
       }
 
-      setScheme(stringToScheme(data.scheme));
+      const updateConfigData = data as UpdateConfigData;
+      setScheme(stringToScheme(updateConfigData.scheme));
     };
 
     bridge.subscribe(schemeCatcher);
