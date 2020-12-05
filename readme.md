@@ -80,7 +80,7 @@ export default function Settings() {
     <Panel id="settings">
         <PanelHeader>Настройки</PanelHeader>
         
-        <SimpleCell after={<Switch onClick={toggleScheme} checked={scheme === "space_gray"} />}>
+        <SimpleCell after={<Switch onChange={toggleScheme} checked={scheme === "space_gray"} />}>
             Тёмная тема
         </SimpleCell>
     </Panel>
