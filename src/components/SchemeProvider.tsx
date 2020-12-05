@@ -13,6 +13,7 @@ import {
   stringToScheme,
   withStorage,
   updateNativeBars,
+  throttle,
 } from "../utils";
 import { IS_IFRAME, IS_WEBVIEW } from "../shared/constants";
 
@@ -64,6 +65,11 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
     return () => bridge.unsubscribe(schemeCatcher);
   }, []);
 
+  const throttledUpdateNativeBars = useCallback(
+    throttle(updateNativeBars, 1000),
+    []
+  );
+
   /**
    * Подстраиваем статус-бар, экшен-бар и бар с навигацией под тему.
    * */
@@ -72,7 +78,9 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
       return;
     }
 
-    updateNativeBars(scheme);
+    requestAnimationFrame(() => {
+      throttledUpdateNativeBars(scheme);
+    });
   }, [scheme]);
 
   const setSchemeWithStorage = useCallback(withStorage(setScheme), []);
