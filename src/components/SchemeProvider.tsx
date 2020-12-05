@@ -9,10 +9,10 @@ import { SchemeContext } from "../contexts";
 import { ConfigProviderProps, Scheme } from "../types";
 import {
   appearanceByScheme,
-  colorByScheme,
   schemeFromStorage,
   stringToScheme,
   withStorage,
+  updateNativeBars,
 } from "../utils";
 import { IS_IFRAME, IS_WEBVIEW } from "../shared/constants";
 
@@ -72,13 +72,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
       return;
     }
 
-    const color = colorByScheme(scheme);
-
-    bridge.send("VKWebAppSetViewSettings", {
-      status_bar_style: scheme === Scheme.LIGHT ? "dark" : "light",
-      action_bar_color: color,
-      navigation_bar_color: color,
-    });
+    updateNativeBars(scheme);
   }, [scheme]);
 
   if (scheme === null) {
