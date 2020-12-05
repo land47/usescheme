@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import bridge, {
   UpdateConfigData,
   VKBridgeSubscribeHandler,
@@ -75,6 +75,8 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
     updateNativeBars(scheme);
   }, [scheme]);
 
+  const setSchemeWithStorage = useCallback(withStorage(setScheme), []);
+
   if (scheme === null) {
     return null;
   }
@@ -83,7 +85,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
     <SchemeContext.Provider
       value={{
         scheme,
-        setScheme: withStorage(setScheme),
+        setScheme: setSchemeWithStorage,
       }}
     >
       <ConfigProvider
