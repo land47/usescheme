@@ -1,4 +1,4 @@
-import { storage } from "@_themis/vkstorage";
+import { storage } from "@unexp/vkstorage";
 import { delay } from "../utils";
 
 /**
