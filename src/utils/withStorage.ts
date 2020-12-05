@@ -1,13 +1,12 @@
 import { stringToScheme, throttle } from "../utils";
 import { Scheme } from "../types";
-import { storage } from "@_themis/vkstorage";
+import { storage } from "@unexp/vkstorage";
 
 /**
  * Используется для вызова `setScheme` с записыванием темы в стор.
  * */
 const withStorage = <T, A extends [T], R>(func: (...args: A) => R) => {
   function setSchemeToStorage(scheme: Scheme) {
-    console.log("set to storage");
     storage.set("scheme", scheme);
   }
 
