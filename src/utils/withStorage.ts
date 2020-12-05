@@ -7,20 +7,18 @@ import { storage } from "@_themis/vkstorage";
  * */
 const withStorage = <T, A extends [T], R>(func: (...args: A) => R) => {
   function setSchemeToStorage(scheme: Scheme) {
+    console.log("set to storage");
     storage.set("scheme", scheme);
   }
 
-  const throttled = throttle(setSchemeToStorage, 900);
+  const throttled = throttle(setSchemeToStorage, 500);
 
   return (...args: A) => {
     const [scheme] = args;
 
     if (typeof scheme === "string") {
       func(...args);
-
-      requestAnimationFrame(() => {
-        throttled(stringToScheme(scheme));
-      });
+      throttled(stringToScheme(scheme));
     }
   };
 };
