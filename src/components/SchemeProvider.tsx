@@ -6,7 +6,7 @@ import bridge, {
 import { ConfigProvider } from "@vkontakte/vkui";
 
 import { SchemeContext } from "../contexts";
-import { ConfigProviderProps, Scheme } from "../types";
+import { ConfigProviderProps, Scheme } from "../shared/types";
 import {
   appearanceByScheme,
   schemeFromStorage,

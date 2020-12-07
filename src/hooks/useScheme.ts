@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { SchemeContext } from "../contexts";
-import { SchemeControls } from "../types";
+import { SchemeControls } from "../shared/types";
 import { alternativeScheme } from "../utils";
 
 export default function useScheme(): SchemeControls {
