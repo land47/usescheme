@@ -71,7 +71,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
   );
 
   /**
-   * Подстраиваем статус-бар, экшен-бар и бар с навигацией под тему.
+   * Подстраиваем статус и экшен-бар под тему.
    * */
   useEffect(() => {
     if (scheme === null) {
