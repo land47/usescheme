@@ -78,9 +78,7 @@ const SchemeProvider: FC<Partial<ConfigProviderProps>> = ({
       return;
     }
 
-    requestAnimationFrame(() => {
-      throttledUpdateNativeBars(scheme);
-    });
+    throttledUpdateNativeBars(scheme);
   }, [scheme]);
 
   const setSchemeWithStorage = useCallback(withStorage(setScheme), []);
