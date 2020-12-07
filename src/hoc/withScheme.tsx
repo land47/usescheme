@@ -1,6 +1,6 @@
 import React, { Component, ComponentType, } from "react";
 import { SchemeContext } from "../contexts";
-import { SchemeControls } from "../types";
+import { SchemeControls } from "../shared/types";
 import { alternativeScheme } from "../utils";
 
 export default function withScheme<P>(Child: ComponentType<P>) {
