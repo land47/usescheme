@@ -6,18 +6,17 @@ import { storage } from "@unexp/vkstorage";
  * Используется для вызова `setScheme` с записыванием темы в стор.
  * */
 const withStorage = <T, A extends [T], R>(func: (...args: A) => R) => {
-  function setSchemeToStorage(scheme: Scheme) {
-    storage.set("scheme", scheme);
-  }
-
-  const throttled = throttle(setSchemeToStorage, 500);
+  const setSchemeToStorage = throttle(
+    (scheme: Scheme) => storage.set("scheme", scheme),
+    500
+  );
 
   return (...args: A) => {
     const [scheme] = args;
 
     if (typeof scheme === "string") {
       func(...args);
-      throttled(stringToScheme(scheme));
+      setSchemeToStorage(stringToScheme(scheme));
     }
   };
 };
