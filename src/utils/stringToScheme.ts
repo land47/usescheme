@@ -1,4 +1,4 @@
-import { Scheme } from "../types";
+import { Scheme } from "../shared/types";
 
 /**
  * Приводит строку к `Scheme` типа.

@@ -1,5 +1,5 @@
 import { stringToScheme, throttle } from "../utils";
-import { Scheme } from "../types";
+import { Scheme } from "../shared/types";
 import { storage } from "@unexp/vkstorage";
 
 /**

@@ -1,5 +1,5 @@
 import bridge from "@vkontakte/vk-bridge";
-import { Scheme } from "../types";
+import { Scheme } from "../shared/types";
 import { colorByScheme } from "../utils";
 import { IS_WEBVIEW } from "../shared/constants";
 
