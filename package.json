@@ -1,6 +1,6 @@
 {
   "name": "@unexp/usescheme",
-  "version": "1.1.28",
+  "version": "1.2.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
