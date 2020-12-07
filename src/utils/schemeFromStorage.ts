@@ -1,5 +1,4 @@
 import { storage } from "@unexp/vkstorage";
-import { delay } from "../utils";
 
 /**
  * Возвращает сохранённую в `VKStorage` тему.
