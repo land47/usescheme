@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/profilemyprofile/useScheme.git"
+    "url": "git+https://github.com/land47/useScheme.git"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
